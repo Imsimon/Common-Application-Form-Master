@@ -19,9 +19,41 @@ $(function(){
 	Event handlers
 	*/
 
+	function FetchConselorStudentsByClazzsyncSuccess(r)
+	{
+		$('#notification-board').children('h3').remove();
+		$('#class-list').empty();
+		
+
+		// studentDatas is an array
+		var studentDatas = r.studentDatas;
+		var length = studentDatas.length;
+		if (length > 0){
+			$('#notification-board').prepend('<h3>Student List:</h3>');
+			for (var i=0; i<length; i++){
+				console.log(studentDatas[i].id);
+				$('#class-list').append('<li id ="'+ i.toString() +'"><a id = "'+studentDatas[i].id +'" href = "#">'+ (i+1).toString() +'</a></li>');
+			}
+		}
+		else{
+			$('#notification-board').prepend('<h3>Sorry, no students available.</h3>');
+		}
+	}
+
 	function fetchConselorClazzssyncSuccess(r)
 	{
-		alert(r);
+		//classDatas is an array			
+		var clazzDatas = r.clazzDatas;
+		var length = clazzDatas.length;
+		if (length >0){
+			$('#notification-board').prepend('<h3>Class List:</h3>');
+			for (var i=0; i<length; i++){
+				$('#class-list').append('<li id ="'+ i.toString() +'"><a id = "'+clazzDatas[i].id +'" href = "#">'+ (i+1).toString() +'</a></li>');
+			}
+		}
+		else{
+			$('#notification-board').prepend('<h3>Sorry, no class available.</h3>');
+		}
 	}
 
 	function fetchUserIDsyncSuccess(r)
@@ -48,6 +80,13 @@ $(function(){
 		$('#LoadingPicture').hide();
 	});
 */
+
+	$('#class-list').on('click','a',function(e){
+		request = new RequestManager();
+		e.preventDefault();
+		data = {id: $(this).attr('id'), schoolid: "0"};
+		request.FetchConselorStudentsByClazzsync(Obj2str(data), FetchConselorStudentsByClazzsyncSuccess, error);
+	});
 	
 	$('#fill-the-form').click(function() {
 		chrome.tabs.executeScript(null, {file: "fields_info.js"});

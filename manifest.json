@@ -25,6 +25,7 @@
 
   "permissions": [
     "tabs",
+    "storage",
     "https://www.commonapp.org/*",
     "http://112.124.28.229/*"
   ]
