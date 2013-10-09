@@ -4,6 +4,9 @@ $(function(){
 	The main function
 	*/
 	function main() {
+		/*
+		Do something here to check if there's anything in chrome.storage, so that the page will remain the same from last time.
+		*/
 		$('#fill-the-form').attr('disabled', 'disabled');
 		$('#LoadingPicture').hide();
 		chrome.tabs.query({'active':true, 'lastFocusedWindow':true}, function(tabs) {
@@ -19,20 +22,29 @@ $(function(){
 	Event handlers
 	*/
 
+
+	//7
+	function FetchAllStudentInfossyncSuccess(r){
+		chrome.storage.local.set(r,function(){
+			console.log('success');
+		});
+	}
+	
+	//5
 	function FetchConselorStudentsByClazzsyncSuccess(r)
 	{
 		$('#notification-board').children('h3').remove();
 		$('#class-list').empty();
 		
-
+		
 		// studentDatas is an array
 		var studentDatas = r.studentDatas;
 		var length = studentDatas.length;
 		if (length > 0){
 			$('#notification-board').prepend('<h3>Student List:</h3>');
 			for (var i=0; i<length; i++){
-				console.log(studentDatas[i].id);
-				$('#class-list').append('<li id ="'+ i.toString() +'"><a id = "'+studentDatas[i].id +'" href = "#">'+ (i+1).toString() +'</a></li>');
+				$('#student-list').append('<li id ="'+ i.toString() +'"><a id = "'+studentDatas[i].id +'" href = "#">'+ (i+1).toString() +'</a></li>');
+				
 			}
 		}
 		else{
@@ -40,6 +52,7 @@ $(function(){
 		}
 	}
 
+	//3
 	function fetchConselorClazzssyncSuccess(r)
 	{
 		//classDatas is an array			
@@ -55,14 +68,21 @@ $(function(){
 			$('#notification-board').prepend('<h3>Sorry, no class available.</h3>');
 		}
 	}
-
+	
+	//2
 	function fetchUserIDsyncSuccess(r)
 	{
 		request = new RequestManager();	
 		data = {id: r.id, schoolid: r.schoolid};
+
+		chrome.storage.local.set({schoolid: r.schoolid}, function(){
+			console.log('Now school id');
+		});
+
 		request.FetchConselorClazzssync(Obj2str(data),fetchConselorClazzssyncSuccess, error);
 	}
 	
+	// 1
 	function loginSuccess(r) {
 		request = new RequestManager();	
 		data = {id: "0", schoolid: "0"};
@@ -81,11 +101,32 @@ $(function(){
 	});
 */
 
+	//6
+	$('#student-list').on('click','a',function(e){
+		request = new RequestManager();
+		e.preventDefault();
+		var studentId = $(this).attr('id');
+		chrome.storage.local.get("schoolid", function(obj){
+			schoolId = obj.schoolid;
+			data = {id: studentId, schoolid: schoolId};
+			request.FetchAllStudentInfossync(Obj2str(data), FetchAllStudentInfossyncSuccess, error);
+			
+		});
+	});
+
+	//4
 	$('#class-list').on('click','a',function(e){
 		request = new RequestManager();
 		e.preventDefault();
-		data = {id: $(this).attr('id'), schoolid: "0"};
-		request.FetchConselorStudentsByClazzsync(Obj2str(data), FetchConselorStudentsByClazzsyncSuccess, error);
+
+		// Whether or not classID should be stored in local storage is a problem.
+		var classId = $(this).attr('id');
+		chrome.storage.local.get("schoolid", function(obj){
+			schoolId = obj.schoolid;
+			data = {id: classId, schoolid: schoolId};
+			request.FetchConselorStudentsByClazzsync(Obj2str(data), FetchConselorStudentsByClazzsyncSuccess, error);
+			
+		});
 	});
 	
 	$('#fill-the-form').click(function() {
