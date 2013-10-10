@@ -1,21 +1,45 @@
 <!doctype html>
 <html>
+<head>
+	<title>Form Master Extension</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<h3 align="center">From Master</h3>
+</head>
+
 <script type="text/javascript" src="lib/api.js"></script>
 <script type="text/javascript" src="lib/md5.js"></script>
 <script type="text/javascript" src="lib/jquery-1.10.2.min.js"></script>
 
 <script type="text/javascript" src="popup.js"></script>
 
-<form action="#">
-  User Name: <input type="text" name="userName" value = "15295001995"><br>
-  Password: <input type="text" name="password" value = "888888"><br>
-  <input type="submit" id = "login" value="Submit">
-</form>
-<div id = 'notification-board'>
-  <ul id = 'class-list'>
-  </ul>
-  <ul id = 'student-list'>
-  </ul>
+<script type="text/javascript" src="lib/bootstrap.min.js"></script>
+
+
+<div class="container-fluid" style='width:150px'>
+	<form class="form-horizontal" action="#">
+	  	<div>
+	    	<label for="inputUserName">User Name</label>
+	      		<input class="input-small" type="text" name="userName" value = "15295001995">
+	  	</div>
+	  	<div>
+	    	<label for="inputPassword">Password</label>
+	      		<input class="input-small" type="text" name="password" value = "888888">
+	  	</div>
+	    <br>
+	    <div>
+		   		<input class="btn-primary" type="submit" id = "login" value="Submit">
+	  	</div>
+	</form>
+
+
+	
+	<div id = 'notification-board'>
+	  <table class="table table-hover" id='class-list'>
+	  </table>
+	  <talbe class="table table-hover" id='student-list'>
+	  </talbe>
+	</div>
 </div>
 
 <button id = "fill-the-form">Fill the form</button><br>

@@ -43,7 +43,7 @@ $(function(){
 		if (length > 0){
 			$('#notification-board').prepend('<h3>Student List:</h3>');
 			for (var i=0; i<length; i++){
-				$('#student-list').append('<li id ="'+ i.toString() +'"><a id = "'+studentDatas[i].id +'" href = "#">'+ (i+1).toString() +'</a></li>');
+				$('#student-list').append('<tr id ="'+ studentDatas[i].id +'"><td align="center"><a id = "'+ studentDatas[i].id +'" href = "#">'+ studentDatas[i].fname + studentDatas[i].lname +'</a></td></tr>');
 				
 			}
 		}
