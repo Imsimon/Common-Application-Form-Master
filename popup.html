@@ -4,52 +4,51 @@
 	<title>Form Master Extension</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/styles.css">
-	<h3 align="center">From Master</h3>
+	<h3 align="center">Form Master</h3>
 </head>
 
-<script type="text/javascript" src="lib/api.js"></script>
-<script type="text/javascript" src="lib/md5.js"></script>
-<script type="text/javascript" src="lib/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="lib/api.js"></script>
+  <script type="text/javascript" src="lib/md5.js"></script>
+  <script type="text/javascript" src="lib/jquery-1.10.2.min.js"></script>
+  
+  <script type="text/javascript" src="popup.js"></script>
+  
+  <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+  
 
-<script type="text/javascript" src="popup.js"></script>
+<body>
+  <div class="container" style="width:250px" aligh="center">
+    <form class="form-horizontal" action="#">
+      <div class="userInfo">
+	<label id="inputUserName">Username</label>
+	<input class="input-small" type="text" name="userName" value = "15295001995">
+	<label for="inputPassword">Password</label>
+	<input class="input-small" type="text" name="password" value = "888888">
+      
+      <br>
+      <br>
+      <input class="btn-primary" type="submit" id="login" value="Submit">
+      </form>
+      </div>
+  </div>
+    
+    
+    
+  <div class="classInfo" align="center"> 
+    <div id="notification-board">
+      <table class="table table-hover" id="class-list">
+      </table>
+      <table class="table table-hover" id="student-list">
+      </table>
+    </div>
+ </div>
+  
+  <div class="fillButton">
+    <button id="fill-the-form">Fill the form</button><br>
+  </div>
 
-<script type="text/javascript" src="lib/bootstrap.min.js"></script>
-
-
-<div class="container-fluid" style='width:150px'>
-	<form class="form-horizontal" action="#">
-	  	<div>
-	    	<label for="inputUserName">User Name</label>
-	      		<input class="input-small" type="text" name="userName" value = "15295001995">
-	  	</div>
-	  	<div>
-	    	<label for="inputPassword">Password</label>
-	      		<input class="input-small" type="password" name="password" value = "888888">
-	  	</div>
-	    <br>
-	    <div>
-		   		<input class="btn-primary" type="submit" id = "login" value="Submit">
-	  	</div>
-	</form>
-
-
-	
-	<div id = 'notification-board'>
-	  <table class="table table-striped" border="1" id='class-list'>
-	  </table>
-	  <talbe class="table table-striped" border="1" id='student-list'>
-	  </talbe>
-	</div>
-
-	<button class="btn-primary" id="fill-the-form">Fill the form</button><br>
-
-	<br>
-	<br>
-</div>
-
-
-<div id = "LoadingPicture">
-<img src = "img/LoadingPage.gif" width = '40' height = '40'>
-</div> 
-
+  <div id="LoadingPicture">
+    <img src="img/LoadingPage.gif" width = '40' height = '40'>
+  </div> 
+</body>
 </html>

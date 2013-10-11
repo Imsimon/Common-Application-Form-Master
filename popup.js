@@ -43,7 +43,7 @@ $(function(){
 		if (length > 0){
 			$('#notification-board').prepend('<h3>Student List:</h3>');
 			for (var i=0; i<length; i++){
-				$('#student-list').append('<tr align="center" id ="'+ studentDatas[i].id +'"><td><a id = "'+ studentDatas[i].id +'" href = "#">'+ studentDatas[i].fname.toString() + studentDatas[i].lname.toString() +'</a></td></tr>');
+				$('#student-list').append('<tr id ="'+ studentDatas[i].id +'"><td style="text-align:center"><a id = "'+ studentDatas[i].id +'" href = "#">'+ studentDatas[i].fname + studentDatas[i].lname +'</a></td></tr>');
 				
 			}
 		}
@@ -61,7 +61,7 @@ $(function(){
 		if (length >0){
 			$('#notification-board').prepend('<h3>Class List:</h3>');
 			for (var i=0; i<length; i++){
-				$('#class-list').append('<tr align="center" id ="'+ clazzDatas[i].id +'"><td><a id = "'+clazzDatas[i].id +'" href = "#">'+ (i+1).toString() +'</a></td></tr>');
+				$('#class-list').append('<tr id ="'+ i.toString() +'"><td style="text-align:center"><a id = "'+clazzDatas[i].id +'" href = "#">'+ (i+1).toString() +'</a></td>/tr>');
 			}
 		}
 		else{
@@ -138,7 +138,7 @@ $(function(){
 		e.preventDefault();
 		request = new RequestManager();	
 		var userName = $("input[type='text'][name='userName']").val();
-		var password = hex_md5($("input[type='password'][name='password']").val());
+		var password = hex_md5($("input[type='text'][name='password']").val());
 		var data = {loginname: userName, loginpwd: password};
 		
 		request.Loginsync(Obj2str(data), loginSuccess, error);
